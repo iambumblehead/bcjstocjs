@@ -18,14 +18,14 @@ var bcjstocjs = module.exports = function (content) {
       expression &&
         expression.type === 'CallExpression' &&
         expression.callee.type === 'MemberExpression' &&
-        expression.arguments.reduce((prev, arg) => (
-          prev || (arg.type === 'Identifier' &&
-                   arg.name === 'exports')
-        ), false) &&
-        expression.arguments.reduce((prev, arg) => (
-          prev || (arg.type === 'Literal' &&
-                   arg.value === '__esModule')
-        ), false));
+        expression.arguments.reduce(function (prev, arg) {
+          return prev || (arg.type === 'Identifier' &&
+                          arg.name === 'exports');
+        }, false) &&
+        expression.arguments.reduce(function (prev, arg) {
+          return prev || (arg.type === 'Literal' &&
+                          arg.value === '__esModule');
+        }, false));
   }
 
   // module.exports = exports['default']; // false
@@ -77,7 +77,7 @@ var bcjstocjs = module.exports = function (content) {
   }
   
   var ast = esprima.parse(content);
-  ast.body = ast.body.filter(node => {
+  ast.body = ast.body.filter(function (node) {
     var remove = false,
         expression = node.expression;
 

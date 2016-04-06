@@ -12,6 +12,8 @@ describe("bcjstocjs", function () {
 
     var result = bcjstocjs(bcjs1);
 
+    //console.log('result is ', result);
+    
     expect(true).toBe(true);
   });
 });
